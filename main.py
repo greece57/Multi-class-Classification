@@ -3,6 +3,7 @@ import csv as csv
 from log_loss import log_loss
 from sklearn.cross_validation import KFold
 from classify import classify
+from helper import createNumberedDictionary
 
 # Load data
 csv_file_object = csv.reader(open('train.csv', 'rb')) # Load in the csv file
@@ -15,10 +16,12 @@ data = np.array(rows) 		# Then convert from a list to an array
 
 
 daysIndex = {'Monday':0,'Tuesday':1,'Wednesday':2,'Thursday':3,'Friday':4,'Saturday':5,'Sunday':6} # A dictionary keyed by day to its index
+departmentIndex = createNumberedDictionary(data[:,5])
 
 numVisits = len(np.unique(data[:,1])) # Number of distinct visits
 
-X = np.zeros((numVisits, len(daysIndex))) # Matrix containing the day of each visit
+
+X = np.zeros((numVisits, len(daysIndex))) # Matrix containing the day and department of each visit
 Y = np.zeros(numVisits) # A matrix containing the trip types of the visits
 
 previousVisit = 0
