@@ -21,20 +21,23 @@ departmentIndex = createNumberedDictionary(data[:,5])
 numVisits = len(np.unique(data[:,1])) # Number of distinct visits
 
 
-X = np.zeros((numVisits, len(daysIndex))) # Matrix containing the day and department of each visit
+X = np.zeros((numVisits, 2)) # Matrix containing the day and department of each visit
 Y = np.zeros(numVisits) # A matrix containing the trip types of the visits
 
 previousVisit = 0
 index = -1
 for i in range(data.shape[0]):
-	if data[i,1] != previousVisit: 		# If visit number has changed, initialize a new visit
-		index += 1						# The index of the new visit
-		num_products = 1				# Set the number of products to 1
-		previousVisit = data[i,1]			# Set previous visit number to the current visit
-		X[index,daysIndex[data[i,2]]] = 1	# Set the index of the day of the visit to 1
-		Y[index] = int(data[i,0])			# Store the type of the trip of the current visit
-	else: 								# If visit number has not changed, it's still the same visit
-		num_products += 1				# Increase the number of products of the current visit
+    if data[i,1] != previousVisit: 		# If visit number has changed, initialize a new visit
+        index += 1						# The index of the new visit
+        num_products = 1				# Set the number of products to 1
+        previousVisit = data[i,1]			# Set previous visit number to the current visit
+        weekday = daysIndex[data[i,2]]
+        department = departmentIndex[data[i,5]]
+        X[index,0] = weekday # Set the day of the visit
+        X[index,1] = department # Set the department
+        Y[index] = int(data[i,0])			# Store the type of the trip of the current visit
+    else: 								# If visit number has not changed, it's still the same visit
+        num_products += 1				# Increase the number of products of the current visit
 	
 
 kf = KFold(X.shape[0], n_folds=10) # Initialize cross validation
