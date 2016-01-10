@@ -1,6 +1,8 @@
 # Multi-class-Classification
 AUEB Project for Data and Web Mining
 
+Average Log Loss of train_small:  3.07967394989
+
 Hey,  
 so to be able to use this repository so you can develop your solution of the code you have to follow this short tutorial:
 
