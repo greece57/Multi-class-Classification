@@ -6,6 +6,7 @@ Created on Sun Jan 10 18:01:56 2016
 """
 
 import numpy as np
+import csv as csv
 
 def createNumberedDictionary(data, normalize=False):
     data = np.unique(data)    
@@ -19,3 +20,16 @@ def createNumberedDictionary(data, normalize=False):
         dataDirectory[data[i]] = entryNr
         entryNr += step
     return dataDirectory    
+    
+    
+def readFile(name):
+    # Load data
+    csv_file_object = csv.reader(open(name, 'rb')) # Load in the csv file
+    csv_file_object.next() 					  # Skip the fist line as it is a header
+    rows=[] 											  # Create a variable to hold the data
+
+    for row in csv_file_object: # Skip through each row in the csv file,
+        rows.append(row[0:]) 	# adding each row to the data variable
+    data = np.array(rows) 		# Then convert from a list to an array
+    
+    return data
