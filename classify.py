@@ -1,5 +1,6 @@
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import GaussianNB
+from sklearn.ensemble import RandomForestClassifier
 
 def classify(trainSet, trainLabels, testSet):
 	
@@ -12,6 +13,14 @@ def classify(trainSet, trainLabels, testSet):
 def classifyBayes(trainSet, trainLabels, testSet):
     
     clf = GaussianNB()
+    clf.fit(trainSet, trainLabels)
+    predictedLabels = clf.predict_proba(testSet)
+    
+    return predictedLabels, clf.classes_
+    
+def classifyRandomForest(trainSet, trainLabels, testSet):
+    
+    clf = RandomForestClassifier(10, min_samples_split=4)
     clf.fit(trainSet, trainLabels)
     predictedLabels = clf.predict_proba(testSet)
     
