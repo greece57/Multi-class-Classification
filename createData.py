@@ -69,15 +69,15 @@ for i in range(0,len(visits)):
         newData[row,fLColumn] = newData[row,fLColumn] + sC
     newData[row,3] = totalScanCount
 
-newData = newData[:].astype('str')
+#newData = newData[:].astype('str')
 
-newData[0,0] = "TripType"
-newData[0,1] = "Weekday"
-newData[0,2] = "ScanCount"
-for i in range(0,noDepartments):
-    newData[0,i+3] = departments[i]
-for i in range(0,noFineLines):
-    newData[0,i+noDepartments+3] = fineLines[i]
+#newData[0,0] = "TripType"
+#newData[0,1] = "Weekday"
+#newData[0,2] = "ScanCount"
+#for i in range(0,noDepartments):
+#    newData[0,i+3] = departments[i]
+#for i in range(0,noFineLines):
+#    newData[0,i+noDepartments+3] = fineLines[i]
 
 print 'Exporting new Matrix'
 
