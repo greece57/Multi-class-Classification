@@ -7,8 +7,8 @@ Created on Sun Jan 10 18:01:56 2016
 
 import numpy as np
 import csv as csv
-from log_loss import log_loss
-from sklearn.cross_validation import KFold
+import threading
+from log_loss import log_loss, calc
 
 def createNumberedDictionary(data, normalize=False):
     data = np.unique(data)    
@@ -52,20 +52,4 @@ def readFile(name, maxRows = -1):
     return data
     
 def calcLogLoss(X,Y,classifier):
-    kf = KFold(X.shape[0], n_folds=10) # Initialize cross validation
-
-    iterations = 0 # Variable that will store the total iterations  
-    totalLogloss = 0 # Variable that will store the correctly predicted intances  
-
-    for trainIndex, testIndex in kf:
-        trainSet = X[trainIndex]
-        testSet = X[testIndex]
-        trainLabels = Y[trainIndex]
-        testLabels = Y[testIndex]
-
-        predictions, trips = classifier(trainSet, trainLabels, testSet)
-        logloss = log_loss(testLabels, predictions, trips)	
-        print 'Log Loss: ', logloss
-        totalLogloss += logloss
-        iterations += 1
-    print 'Average Log Loss: ', totalLogloss/iterations
+    calc(X,Y,classifier)
