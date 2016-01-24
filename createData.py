@@ -19,21 +19,24 @@ class Visit:
         self.departments = []
         self.fineLines = []
 
-data, header = readFileInclHeader("train_small.csv")
+data, header = readFileInclHeader("train.csv", 647054)
 
 visits = []
 
+print 'Start reading entries'
 currentVisit = Visit(-1,-1,-1)
 for entry in data:
-    if (entry[1] != currentVisit.visitNumber):
-        v = Visit(entry[0],entry[1],entry[2])
-        currentVisit = v
-        visits.append(currentVisit)
-    currentVisit.upc.append(entry[3])
-    currentVisit.scanCounts.append(entry[4])
-    currentVisit.departments.append(entry[5])
-    currentVisit.fineLines.append(entry[6])
-    
+    if (entry[5]!='NULL'):
+        if (entry[1] != currentVisit.visitNumber):
+            v = Visit(entry[0],entry[1],entry[2])
+            currentVisit = v
+            visits.append(currentVisit)
+        currentVisit.upc.append(entry[3])
+        currentVisit.scanCounts.append(entry[4])
+        currentVisit.departments.append(entry[5])
+        currentVisit.fineLines.append(entry[6])
+
+print 'Creating data for new Matrix'
 noVisits = len(visits)
 departmentsDict = createNumberedDictionary(data[:,5])
 fineLineDict = createNumberedDictionary(data[:,6])
@@ -45,8 +48,9 @@ noFineLines = len(fineLines)
 noFeatures = 3 + noDepartments + noFineLines
 
 newData = np.zeros((noVisits + 1, noFeatures))
-#newData = np.chararray((noVisits + 1, noFeatures))
-#newData[:] = '0'
+newData = newData[:].astype('int')
+
+print 'Filling new Matrix'
 
 for i in range(0,len(visits)):
     row = i + 1
@@ -74,6 +78,8 @@ for i in range(0,noDepartments):
     newData[0,i+3] = departments[i]
 for i in range(0,noFineLines):
     newData[0,i+noDepartments+3] = fineLines[i]
+
+print 'Exporting new Matrix'
 
 np.savetxt("newData.csv", newData, delimiter=",", fmt="%s")
 
