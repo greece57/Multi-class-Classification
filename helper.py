@@ -30,6 +30,7 @@ def readFileInclHeader(name, maxRows = -1):
     header = csv_file_object.next() 					  # Skip the fist line as it is a header
     rows=[] 											  # Create a variable to hold the data
 
+
     cRow = 1.0
     for row in csv_file_object: # Skip through each row in the csv file,
         rows.append(row[0:]) 	# adding each row to the data variable
@@ -39,6 +40,8 @@ def readFileInclHeader(name, maxRows = -1):
             percent = (cRow/maxRows)*100.0
             if (percent % 1 == 0):
                 print 'Progress: ', percent
+                if (cRow == maxRows):
+                    break
             
     data = np.array(rows) 		# Then convert from a list to an array
     
