@@ -1,15 +1,15 @@
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import GaussianNB
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.svm import SVC
-
+    
 def classify(trainSet, trainLabels, testSet):
-	
-	clf = LogisticRegression()
-	clf.fit(trainSet, trainLabels)
-	predictedLabels = clf.predict_proba(testSet)
 
-	return predictedLabels, clf.classes_
+    clf = LogisticRegression()
+    clf.fit(trainSet, trainLabels)
+    predictedLabels = clf.predict_proba(testSet)
+    
+    return predictedLabels, clf.classes_
 
 def classifyBayes(trainSet, trainLabels, testSet):
     
@@ -27,10 +27,18 @@ def classifyRandomForest(trainSet, trainLabels, testSet):
     
     return predictedLabels, clf.classes_
     
-def classifySupportVectorMaschine(trainSet, trainLables, testSet):
+def classifySupportVectorMaschine(trainSet, trainLabels, testSet):
     
     clf = SVC(C=2.0, probability=True, verbose=True)
-    clf.fit(trainSet, trainLables)
+    clf.fit(trainSet, trainLabels)
+    predictedLabels = clf.predict_proba(testSet)
+    
+    return predictedLabels, clf.classes_
+    
+def classifyGradientBoosting(trainSet, trainLabels, testSet):
+    
+    clf = GradientBoostingClassifier(verbose=1)
+    clf.fit(trainSet, trainLabels)
     predictedLabels = clf.predict_proba(testSet)
     
     return predictedLabels, clf.classes_

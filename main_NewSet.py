@@ -8,8 +8,8 @@ Created on Sun Jan 24 17:54:53 2016
 import numpy as np
 import time
 from helper import readFile, calcLogLoss
-from classify import classifyRandomForest
-from classify import classifySupportVectorMaschine
+from classify import classifyRandomForest, classifySupportVectorMaschine
+from classify import classifyGradientBoosting
 from createData import create
 
 def classifyDataFile(file, classifierName = '', classifierOption = '', option = 'readFile'):
@@ -34,6 +34,8 @@ def classifyDataFile(file, classifierName = '', classifierOption = '', option = 
         classifier = classifyRandomForest
     if (classifierName == 'SVM'):
         classifier = classifySupportVectorMaschine
+    if (classifierName == 'GradientBoosting'):
+        classifier = classifyGradientBoosting
     
     totalLogLoss, loglosses = calcLogLoss(Set, Labels, classifier)
     
@@ -59,8 +61,9 @@ def classifyDataFile(file, classifierName = '', classifierOption = '', option = 
     
     print 'Finished calc LogLoss -> created result file'
     
+
 if __name__ == "__main__":
     #classifyDataFile("train_sample_walmart_final_1000.csv",'randomForest', '10')
     #classifyDataFile("newData.csv",'randomForest', '10')
-    #classifyDataFile("train_small.csv",'SVM', '','calcFromFile')
-    classifyDataFile("train.csv",'SVM', '','calcFromFile')
+    classifyDataFile("train_small.csv",'GradientBoosting', '','calcFromFile')
+    classifyDataFile("train.csv",'GradientBoosting', '','calcFromFile')
