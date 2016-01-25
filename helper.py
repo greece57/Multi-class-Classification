@@ -7,8 +7,7 @@ Created on Sun Jan 10 18:01:56 2016
 
 import numpy as np
 import csv as csv
-import threading
-from log_loss import log_loss, calc
+from log_loss import calc
 
 def createNumberedDictionary(data, normalize=False):
     data = np.unique(data)    
@@ -43,7 +42,8 @@ def readFileInclHeader(name, maxRows = -1):
                 if (cRow == maxRows):
                     break
             
-    data = np.array(rows) 		# Then convert from a list to an array
+    data = np.array(rows).astype('int8') 		# Then convert from a list to an array
+    print 'Bytes: ', data.nbytes    
     
     return data, header
     
@@ -52,4 +52,4 @@ def readFile(name, maxRows = -1):
     return data
     
 def calcLogLoss(X,Y,classifier):
-    calc(X,Y,classifier)
+    return calc(X,Y,classifier)
