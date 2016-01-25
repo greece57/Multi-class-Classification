@@ -1,0 +1,65 @@
+train_small.csv, calcFromFile, randomForest n=100:
+LogLoss: 1.97041084182
+LogLoss: 1.96078167336
+LogLoss: 2.72141495266
+LogLoss: 2.3396840176
+LogLoss: 2.56447786865
+LogLoss: 1.91381549856
+LogLoss: 2.37483567689
+LogLoss: 1.90976825345
+LogLoss: 1.68526194984
+LogLoss: 1.29538179953
+Average LogLoss: 2.07358325324
+------------------
+train_small.csv, calcFromFile, randomForest n=1000:
+LogLoss: 1.59601079572
+LogLoss: 1.59517251808
+LogLoss: 1.73233878745
+LogLoss: 1.60961518238
+LogLoss: 1.88016572486
+LogLoss: 1.61870231161
+LogLoss: 1.67496760905
+LogLoss: 1.56677875905
+LogLoss: 1.40269143788
+LogLoss: 1.28028656034
+Average LogLoss: 1.59567296864
+------------------
+train_small.csv, calcFromFile, randomForest n=10:
+LogLoss: 4.543432513
+LogLoss: 5.30720989043
+LogLoss: 5.98461770398
+LogLoss: 6.67406617782
+LogLoss: 5.15559811717
+LogLoss: 5.59008859047
+LogLoss: 7.93249508772
+LogLoss: 4.65384686766
+LogLoss: 4.66792785854
+LogLoss: 4.63545386588
+Average LogLoss: 5.51447366727
+------------------
+train_small.csv, calcFromFile, randomForest n=50:
+LogLoss: 1.6229984287
+LogLoss: 2.63616189071
+LogLoss: 3.12091288176
+LogLoss: 2.62482175525
+LogLoss: 1.89712357195
+LogLoss: 2.61997188609
+LogLoss: 2.6828289029
+LogLoss: 2.26865889476
+LogLoss: 3.13266932875
+LogLoss: 1.31531866699
+Average LogLoss: 2.39214662079
+------------------
+train_small.csv, calcFromFile, randomForest n=500:
+LogLoss: 1.59828346515
+LogLoss: 1.57920214713
+LogLoss: 2.06118330002
+LogLoss: 1.60361574749
+LogLoss: 2.22451196092
+LogLoss: 1.91328297385
+LogLoss: 2.02714151516
+LogLoss: 1.5912334791
+LogLoss: 1.39797853267
+LogLoss: 1.26398553459
+Average LogLoss: 1.72604186561
+------------------
