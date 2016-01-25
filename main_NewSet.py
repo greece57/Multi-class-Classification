@@ -10,13 +10,16 @@ from helper import readFile, calcLogLoss
 from classify import classifyRandomForest
 
 print 'Start reading'
-data = readFile("train_walmart_final.csv",94247)
+data = readFile("train_sample_walmart_final_1000.csv",1000)
 print 'Stop reading'
 
 Labels = data[:,0]
 Set = np.delete(data, 0 , 1)
 
+data = []
+
 print 'Starting calculation'
 
-calcLogLoss(Set, Labels, classifyRandomForest)
+totalLogLoss, loglosses = calcLogLoss(Set, Labels, classifyRandomForest)
+
 
