@@ -23,7 +23,7 @@ def createNumberedDictionary(data, normalize=False):
     return dataDirectory    
     
     
-def readFileInclHeader(name, maxRows = -1):
+def readFileInclHeader(name, maxRows = -1, convertToInt = True):
     # Load data
     csv_file_object = csv.reader(open(name, 'rb')) # Load in the csv file
     header = csv_file_object.next() 					  # Skip the fist line as it is a header
@@ -43,15 +43,19 @@ def readFileInclHeader(name, maxRows = -1):
                 print 'Progress: ', percent
                 if (cRow == maxRows):
                     break
-            
-    data = np.array(rows).astype('int8') 		# Then convert from a list to an array
+    
+    if convertToInt:
+        data = np.array(rows).astype('int8') 		# Then convert from a list to an array
+    else:
+        data = np.array(rows)
+        
     print 'Bytes: ', data.nbytes    
     
     rows = []
     return data, header
     
-def readFile(name, maxRows = -1):
-    data, header = readFileInclHeader(name, maxRows)
+def readFile(name, maxRows = -1, convertToInt = True):
+    data, header = readFileInclHeader(name, maxRows, convertToInt)
     #data = np.genfromtxt(name, np.int8, delimiter=',', names=True) 
     return data
     

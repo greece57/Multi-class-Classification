@@ -8,9 +8,11 @@ Created on Sun Jan 24 17:54:53 2016
 import numpy as np
 from helper import readFile, calcLogLoss
 from classify import classifyRandomForest
+from createData import createData
 
 print 'Start reading'
-data = readFile("train_sample_walmart_final_1000.csv",1000)
+#data = readFile("train_sample_walmart_final_1000.csv",1000)
+data = createData("train_small.csv", False)
 print 'Stop reading'
 
 Labels = data[:,0]
