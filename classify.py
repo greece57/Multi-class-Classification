@@ -20,7 +20,7 @@ def classifyBayes(trainSet, trainLabels, testSet):
     
 def classifyRandomForest(trainSet, trainLabels, testSet):
     
-    clf = RandomForestClassifier(10, min_samples_split=4, n_jobs=8)
+    clf = RandomForestClassifier(100, min_samples_split=4, n_jobs=1)
     clf.fit(trainSet, trainLabels)
     predictedLabels = clf.predict_proba(testSet)
     

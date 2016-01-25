@@ -28,7 +28,7 @@ def classifyDataFile(file, option = 'readData'):
     
     print 'Starting calculation'
     
-    totalLogLoss, loglosses = calcLogLoss(Set, Labels, classifyRandomForest, 4)
+    totalLogLoss, loglosses = calcLogLoss(Set, Labels, classifyRandomForest)
     
     print 'Writing result to file'
     
