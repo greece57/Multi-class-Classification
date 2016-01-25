@@ -10,8 +10,8 @@ from helper import readFile, calcLogLoss
 from classify import classifyRandomForest
 from createData import create
 
-def classifyDataFile(file, option = 'readData'):
-    if (option == 'readData'):
+def classifyDataFile(file, classifier = '', option = 'readFile'):
+    if (option == 'readFile'):
         print 'Start reading'
         data = readFile(file,1000)
         print 'Stop reading'
@@ -33,6 +33,7 @@ def classifyDataFile(file, option = 'readData'):
     print 'Writing result to file'
     
     outputString = ""
+    outputString += file + ", " + option + ", " + classifier + ":\n"
     for logloss in loglosses:
         outputString += "LogLoss: "
         outputString += str(logloss)
@@ -48,7 +49,7 @@ def classifyDataFile(file, option = 'readData'):
     print 'Finished calc LogLoss -> created result file'
     
 if __name__ == "__main__":
-    #classifyDataFile("train_sample_walmart_final_1000.csv")
-    #classifyDataFile("newData.csv")
-    #classifyDataFile("train_small.csv",'calcFromFile')
-    classifyDataFile("train.csv",'calcFromFile')
+    #classifyDataFile("train_sample_walmart_final_1000.csv",'randomForest n=10')
+    #classifyDataFile("newData.csv",'randomForest n=10')
+    classifyDataFile("train_small.csv",'randomForest n=10','calcFromFile')
+    #classifyDataFile("train.csv",'randomForest n=10','calcFromFile')
