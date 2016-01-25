@@ -50,4 +50,5 @@ def classifyDataFile(file, option = 'readData'):
 if __name__ == "__main__":
     #classifyDataFile("train_sample_walmart_final_1000.csv")
     #classifyDataFile("newData.csv")
-    classifyDataFile("train_small.csv",'calcFromFile')
+    #classifyDataFile("train_small.csv",'calcFromFile')
+    classifyDataFile("train.csv",'calcFromFile')
