@@ -4,12 +4,12 @@ from sklearn.cross_validation import KFold
 from joblib import Parallel, delayed
 
 
-def calc(X,Y,classifier,maxThreads):
+def calc(X,Y,classifier):
     kf = KFold(X.shape[0], n_folds=10) # Initialize cross validation
 
     loglosses = [] # Variable that will store the correctly predicted intances
     
-    loglosses = Parallel(n_jobs=3, verbose=10)(delayed(innerLoopLogLoss)(trainIndex, testIndex, X, Y, classifier) for trainIndex, testIndex in kf)    
+    loglosses = Parallel(n_jobs=5, verbose=10)(delayed(innerLoopLogLoss)(trainIndex, testIndex, X, Y, classifier) for trainIndex, testIndex in kf)    
     
     totalLogloss = 0
     for logloss in loglosses:
@@ -29,6 +29,8 @@ def innerLoopLogLoss(trainIndex, testIndex, X, Y, classifier):
     testLabels = Y[testIndex]
     
     logloss = log_loss(testLabels, predictions, trips)
+    strOutput = 'Logloss: ' + str(logloss)
+    print strOutput
     return logloss
     
 def log_loss(trueLabels, predictedLabels, trips, eps=1e-15):
