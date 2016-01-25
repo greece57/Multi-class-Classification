@@ -76,3 +76,16 @@ LogLoss: 1.3884842608
 LogLoss: 1.25678116982
 Average LogLoss: 1.59419393195
 ------------------
+train_small.csv, calcFromFile, GradientBoosting:
+LogLoss: 2.56742722996
+LogLoss: 3.29576240644
+LogLoss: 2.87647805256
+LogLoss: 2.63591151976
+LogLoss: 2.48426347862
+LogLoss: 2.60352109131
+LogLoss: 2.37792877979
+LogLoss: 2.64731610254
+LogLoss: 2.77887274892
+LogLoss: 1.80310019124
+Average LogLoss: 2.60705816011
+------------------
