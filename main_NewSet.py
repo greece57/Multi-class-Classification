@@ -18,6 +18,7 @@ def classifyDataFile(file, option = 'readData'):
     else:
         print 'Start creating Data'
         data = create(file, False)
+        data = np.delete(data, 0, 0)
         print 'Finished creating Data'
         
     Labels = data[:,0]
@@ -48,4 +49,5 @@ def classifyDataFile(file, option = 'readData'):
     
 if __name__ == "__main__":
     #classifyDataFile("train_sample_walmart_final_1000.csv")
+    #classifyDataFile("newData.csv")
     classifyDataFile("train_small.csv",'calcFromFile')
