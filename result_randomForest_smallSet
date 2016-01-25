@@ -63,3 +63,16 @@ LogLoss: 1.39797853267
 LogLoss: 1.26398553459
 Average LogLoss: 1.72604186561
 ------------------
+train_small.csv, calcFromFile, randomForest n=5000:
+LogLoss: 1.60198136006
+LogLoss: 1.58543373589
+LogLoss: 1.74362018876
+LogLoss: 1.59402793121
+LogLoss: 1.87834709022
+LogLoss: 1.61897749365
+LogLoss: 1.69357869852
+LogLoss: 1.58070739058
+LogLoss: 1.3884842608
+LogLoss: 1.25678116982
+Average LogLoss: 1.59419393195
+------------------
