@@ -9,7 +9,7 @@ def calc(X,Y,classifier,maxThreads):
 
     loglosses = [] # Variable that will store the correctly predicted intances
     
-    loglosses = Parallel(n_jobs=2, verbose=10)(delayed(innerLoopLogLoss)(trainIndex, testIndex, X, Y, classifier) for trainIndex, testIndex in kf)    
+    loglosses = Parallel(n_jobs=3, verbose=10, max_nbytes=None)(delayed(innerLoopLogLoss)(trainIndex, testIndex, X, Y, classifier) for trainIndex, testIndex in kf)    
     
     totalLogloss = 0
     for logloss in loglosses:
@@ -23,9 +23,11 @@ def innerLoopLogLoss(trainIndex, testIndex, X, Y, classifier):
     trainSet = X[trainIndex]
     testSet = X[testIndex]
     trainLabels = Y[trainIndex]
-    testLabels = Y[testIndex]
 
     predictions, trips = classifier(trainSet, trainLabels, testSet)
+    
+    testLabels = Y[testIndex]
+    
     logloss = log_loss(testLabels, predictions, trips)
     return logloss
     
