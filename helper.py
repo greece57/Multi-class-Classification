@@ -55,5 +55,5 @@ def readFile(name, maxRows = -1):
     #data = np.genfromtxt(name, np.int8, delimiter=',', names=True) 
     return data
     
-def calcLogLoss(X,Y,classifier):
-    return calc(X,Y,classifier)
+def calcLogLoss(X,Y,classifier,maxThreads=10):
+    return calc(X,Y,classifier,maxThreads)

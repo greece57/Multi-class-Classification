@@ -1,5 +1,6 @@
 import numpy as np
 import threading
+import time
 from math import log
 from sklearn.cross_validation import KFold
 
@@ -15,22 +16,32 @@ class Thread(threading.Thread):
         self.X = X
         self.Y = Y
         self.classifier = classifier
+        self.handled = False
     def run(self):
         innerLoopLogLoss(self.trainIndex, self.testIndex, self.X, self.Y, self.classifier)
+        self.handled = True
 
-def calc(X,Y,classifier):
+def calc(X,Y,classifier,maxThreads):
     kf = KFold(X.shape[0], n_folds=10) # Initialize cross validation
 
     threads = []
     idx = 0
+    activeThreads = 0
     for trainIndex, testIndex in kf:
+        while (activeThreads >= maxThreads):
+            time.sleep(2)
+            activeThreads = countActiveThreads(threads)
+            threads = [thread for thread in threads if not thread.handled]
         t = Thread(trainIndex, testIndex, X, Y, classifier)
         idx += 1
         print 'Starting Thread ', idx
         t.start()
         threads.append(t)
+        threads = [thread for thread in threads if not thread.handled]
+        activeThreads = countActiveThreads(threads)
     for thread in threads:
         thread.join()
+    threads = [thread for thread in threads if not thread.handled]
         
     totalLogloss = 0
     for logloss in loglosses:
@@ -69,3 +80,10 @@ def log_loss(trueLabels, predictedLabels, trips, eps=1e-15):
     logloss /= trueLabels.size
 
     return logloss
+    
+def countActiveThreads(threads):
+    activeThreads = 0
+    for thread in threads:
+        if (thread.isAlive()):
+            activeThreads += 1
+    return activeThreads

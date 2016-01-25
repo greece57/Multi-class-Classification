@@ -20,6 +20,22 @@ data = []
 
 print 'Starting calculation'
 
-totalLogLoss, loglosses = calcLogLoss(Set, Labels, classifyRandomForest)
+totalLogLoss, loglosses = calcLogLoss(Set, Labels, classifyRandomForest, 4)
 
+print 'Writing result to file'
+
+outputString = ""
+for logloss in loglosses:
+    outputString += "LogLoss: "
+    outputString += str(logloss)
+    outputString += "\n"
+outputString += "Average LogLoss: " + str(totalLogLoss)
+
+outputString += "\n------------------\n"
+    
+fw = open("result", 'a')
+fw.write(outputString)
+fw.close()
+
+print 'Finished calc LogLoss -> created result file'
 
