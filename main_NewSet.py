@@ -9,9 +9,10 @@ import numpy as np
 import time
 from helper import readFile, calcLogLoss
 from classify import classifyRandomForest
+from classify import classifySupportVectorMaschine
 from createData import create
 
-def classifyDataFile(file, classifier = '', option = 'readFile'):
+def classifyDataFile(file, classifierName = '', classifierOption = '', option = 'readFile'):
     if (option == 'readFile'):
         print 'Start reading'
         data = readFile(file,1000)
@@ -29,7 +30,12 @@ def classifyDataFile(file, classifier = '', option = 'readFile'):
     
     print 'Starting calculation: ' + time.ctime()
     
-    totalLogLoss, loglosses = calcLogLoss(Set, Labels, classifyRandomForest)
+    if (classifierName == 'randomForest'):
+        classifier = classifyRandomForest
+    if (classifierName == 'SVM'):
+        classifier = classifySupportVectorMaschine
+    
+    totalLogLoss, loglosses = calcLogLoss(Set, Labels, classifier)
     
     print 'Finished calculation: ' + time.ctime()
     
@@ -37,7 +43,8 @@ def classifyDataFile(file, classifier = '', option = 'readFile'):
     print 'Writing result to file'
     
     outputString = ""
-    outputString += file + ", " + option + ", " + classifier + ":\n"
+    outputString += file + ", " + option + ", "
+    outputString += classifierName + " " + "Option1: " + classifierOption + "\n"
     for logloss in loglosses:
         outputString += "LogLoss: "
         outputString += str(logloss)
@@ -53,7 +60,7 @@ def classifyDataFile(file, classifier = '', option = 'readFile'):
     print 'Finished calc LogLoss -> created result file'
     
 if __name__ == "__main__":
-    #classifyDataFile("train_sample_walmart_final_1000.csv",'randomForest n=10')
-    #classifyDataFile("newData.csv",'randomForest n=10')
-    classifyDataFile("train_small.csv",'randomForest n=10','calcFromFile')
-    #classifyDataFile("train.csv",'randomForest n=10','calcFromFile')
+    #classifyDataFile("train_sample_walmart_final_1000.csv",'randomForest', '10')
+    #classifyDataFile("newData.csv",'randomForest', '10')
+    #classifyDataFile("train_small.csv",'SVM', '','calcFromFile')
+    classifyDataFile("train.csv",'SVM', '','calcFromFile')
