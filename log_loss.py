@@ -1,6 +1,7 @@
 import numpy as np
 from math import log
 from sklearn.cross_validation import KFold
+from joblib import Parallel, delayed
 
 
 def calc(X,Y,classifier,maxThreads):
@@ -8,9 +9,11 @@ def calc(X,Y,classifier,maxThreads):
 
     loglosses = [] # Variable that will store the correctly predicted intances
     
-    for trainIndex, testIndex in kf:
-        logloss = innerLoopLogLoss(trainIndex, testIndex, X, Y, classifier)
-        loglosses.append(logloss)
+    loglosses = Parallel(n_jobs=2)(delayed(innerLoopLogLoss)(trainIndex, testIndex, X, Y, classifier) for trainIndex, testIndex in kf)    
+    
+    #for trainIndex, testIndex in kf:
+    #    logloss = innerLoopLogLoss(trainIndex, testIndex, X, Y, classifier)
+    #    loglosses.append(logloss)
         
     totalLogloss = 0
     for logloss in loglosses:
@@ -19,6 +22,8 @@ def calc(X,Y,classifier,maxThreads):
     return (totalLogloss/len(loglosses)), loglosses
     
 def innerLoopLogLoss(trainIndex, testIndex, X, Y, classifier):
+    
+    print 'started Inner Loop'
     
     trainSet = X[trainIndex]
     testSet = X[testIndex]
