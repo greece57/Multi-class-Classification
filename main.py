@@ -1,5 +1,5 @@
 import numpy as np
-from classify import classify
+from classify import classifyLogistic
 from classify import classifyBayes
 from classify import classifyRandomForest
 from helper import createNumberedDictionary, readFile, calcLogLoss
@@ -35,4 +35,4 @@ if __name__ == "__main__":
             #Y[index] = int(data[i,0])
     	
     
-    calcLogLoss(X,Y,classify)
+    calcLogLoss(X,Y,classifyLogistic)
