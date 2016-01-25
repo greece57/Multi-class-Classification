@@ -6,6 +6,7 @@ Created on Sun Jan 24 17:54:53 2016
 """
 
 import numpy as np
+import time
 from helper import readFile, calcLogLoss
 from classify import classifyRandomForest
 from createData import create
@@ -26,9 +27,12 @@ def classifyDataFile(file, classifier = '', option = 'readFile'):
     
     data = []
     
-    print 'Starting calculation'
+    print 'Starting calculation: ' + time.ctime()
     
     totalLogLoss, loglosses = calcLogLoss(Set, Labels, classifyRandomForest)
+    
+    print 'Finished calculation: ' + time.ctime()
+    
     
     print 'Writing result to file'
     
