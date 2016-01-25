@@ -30,14 +30,16 @@ def readFileInclHeader(name, maxRows = -1):
     rows=[] 											  # Create a variable to hold the data
 
 
-    cRow = 1.0
+    cRow = 1
+    nextLimit = 5
     for row in csv_file_object: # Skip through each row in the csv file,
         rows.append(row[0:]) 	# adding each row to the data variable
         
         if (maxRows > 0):
-            cRow = cRow + 1.0
-            percent = (cRow/maxRows)*100.0
-            if (percent % 1 == 0):
+            cRow = cRow + 1
+            percent = (100*cRow/maxRows)
+            if (percent == nextLimit):
+                nextLimit += 5
                 print 'Progress: ', percent
                 if (cRow == maxRows):
                     break
@@ -45,10 +47,12 @@ def readFileInclHeader(name, maxRows = -1):
     data = np.array(rows).astype('int8') 		# Then convert from a list to an array
     print 'Bytes: ', data.nbytes    
     
+    rows = []
     return data, header
     
 def readFile(name, maxRows = -1):
     data, header = readFileInclHeader(name, maxRows)
+    #data = np.genfromtxt(name, np.int8, delimiter=',', names=True) 
     return data
     
 def calcLogLoss(X,Y,classifier):
