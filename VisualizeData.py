@@ -55,8 +55,9 @@ def plotCategories(data, columnFeatureX, columnFeatureY):
     
 
 
-data = readFile('train_small.csv')
+if __name__ == "__main__":
+    data = readFile('train_small.csv')
 
-plotCategories(data,5,4)
-#plotHistogram(data)
-#plotHistogram(data, 6, '1017')
+    plotCategories(data,5,4)
+    #plotHistogram(data)
+    #plotHistogram(data, 6, '1017')
