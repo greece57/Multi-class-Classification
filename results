@@ -89,3 +89,16 @@ LogLoss: 2.77887274892
 LogLoss: 1.80310019124
 Average LogLoss: 2.60705816011
 ------------------
+train.csv, calcFromFile, Logistic (untuned):
+LogLoss: 1.15588923802
+LogLoss: 1.16153299634
+LogLoss: 1.18532575261
+LogLoss: 1.18032136568
+LogLoss: 1.16084338474
+LogLoss: 1.22567175475
+LogLoss: 1.19446912481
+LogLoss: 1.20172480502
+LogLoss: 1.12808864558
+LogLoss: 1.16527824836
+Average LogLoss: 1.17591453159
+------------------
