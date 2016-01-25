@@ -19,7 +19,7 @@ class Visit:
         self.departments = []
         self.fineLines = []
 
-def createData(filename, exportToFile = True):
+def create(filename, exportToFile = True):
     data, header = readFileInclHeader(filename, 647054, False)
     
     visits = []
@@ -88,4 +88,5 @@ def createData(filename, exportToFile = True):
 
 
 # MAIN
-createData("train_small.csv")
+if __name__ == "__main__":
+    create("train_small.csv")

@@ -4,7 +4,7 @@ from classify import classifyBayes
 from classify import classifyRandomForest
 from helper import createNumberedDictionary, readFile, calcLogLoss
 
-data = readFile('train_small.csv')
+data = readFile('train_small.csv', convertToInt=False)
 
 daysIndex = createNumberedDictionary(data[:,2]) # A dictionary keyed by day to its index
 departmentIndex = createNumberedDictionary(data[:,5])
