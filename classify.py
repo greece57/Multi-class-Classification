@@ -3,7 +3,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.svm import SVC
     
-def classify(trainSet, trainLabels, testSet):
+def classifyLogistic(trainSet, trainLabels, testSet):
 
     clf = LogisticRegression()
     clf.fit(trainSet, trainLabels)
@@ -21,7 +21,7 @@ def classifyBayes(trainSet, trainLabels, testSet):
     
 def classifyRandomForest(trainSet, trainLabels, testSet):
     
-    clf = RandomForestClassifier(10, min_samples_split=4, verbose=10, n_jobs=1)
+    clf = RandomForestClassifier(100, min_samples_split=4, verbose=10, n_jobs=1)
     clf.fit(trainSet, trainLabels)
     predictedLabels = clf.predict_proba(testSet)
     
