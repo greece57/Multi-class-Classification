@@ -8,14 +8,15 @@ Created on Sun Jan 24 17:54:53 2016
 import numpy as np
 import time
 from helper import readFile, calcLogLoss
-from classify import classifyRandomForest, classifySupportVectorMaschine
+from classify import classifyRandomForest, classifySupportVectorMaschine, classifyDecisionTree
 from classify import classifyGradientBoosting, classifyBayes, classifyLogistic
 from createData import create
 
 def classifyDataFile(file, classifierName = '', classifierOption = '', option = 'readFile'):
     if (option == 'readFile'):
         print 'Start reading'
-        data = readFile(file,1000)
+        data = readFile(file,94248)
+        data = np.delete(data, 0 , 1)
         print 'Stop reading'
     else:
         print 'Start creating Data'
@@ -40,6 +41,8 @@ def classifyDataFile(file, classifierName = '', classifierOption = '', option = 
         classifier = classifyBayes
     if (classifierName == 'Logistic'):
         classifier = classifyLogistic
+    if (classifierName == 'Tree'):
+        classifier = classifyDecisionTree
     
     totalLogLoss, loglosses = calcLogLoss(Set, Labels, classifier)
     
@@ -69,5 +72,6 @@ def classifyDataFile(file, classifierName = '', classifierOption = '', option = 
 if __name__ == "__main__":
     #classifyDataFile("train_sample_walmart_final_1000.csv",'randomForest', '10')
     #classifyDataFile("newData.csv",'randomForest', '10')
-    classifyDataFile("train_small.csv",'Logistic', '','calcFromFile')
-    #classifyDataFile("train.csv",'GradientBoosting', '','calcFromFile')
+    classifyDataFile("train_small.csv",'randomForest', '100','calcFromFile')
+    #classifyDataFile("train.csv",'randomForest', '10','calcFromFile')
+    #classifyDataFile("walmart_train.csv",'randomForest','100')
