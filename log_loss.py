@@ -1,4 +1,5 @@
 import numpy as np
+import time
 from math import log
 from sklearn.cross_validation import KFold
 from joblib import Parallel, delayed
@@ -9,8 +10,20 @@ def calc(X,Y,classifier):
 
     loglosses = [] # Variable that will store the correctly predicted intances
     
-    loglosses = Parallel(n_jobs=10, verbose=1)(delayed(innerLoopLogLoss)(trainIndex, testIndex, X, Y, classifier) for trainIndex, testIndex in kf)    
-    
+    #loglosses = Parallel(n_jobs=2, verbose=1)(delayed(innerLoopLogLoss)(trainIndex, testIndex, X, Y, classifier) for trainIndex, testIndex in kf)    
+    idx = 0    
+    for trainIndex, testIndex in kf:
+        logloss = innerLoopLogLoss(trainIndex, testIndex, X, Y, classifier)
+        loglosses.append(logloss)
+        
+        # write progress into file
+        idx+=1
+        fw = open("progress", 'a')
+        outputString = time.ctime() + " - " + str(idx) + ". Logloss: " + str(logloss) + "\n"
+        print outputString
+        fw.write(outputString)
+        fw.close()    
+
     totalLogloss = 0
     for logloss in loglosses:
         totalLogloss += logloss

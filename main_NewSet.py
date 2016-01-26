@@ -70,4 +70,4 @@ if __name__ == "__main__":
     #classifyDataFile("train_sample_walmart_final_1000.csv",'randomForest', '10')
     #classifyDataFile("newData.csv",'randomForest', '10')
     classifyDataFile("train_small.csv",'Logistic', '','calcFromFile')
-    #classifyDataFile("train.csv",'GradientBoosting', '','calcFromFile')
+    #classifyDataFile("train.csv",'Logistic', '','calcFromFile')
