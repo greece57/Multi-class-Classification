@@ -102,3 +102,19 @@ LogLoss: 1.12808864558
 LogLoss: 1.16527824836
 Average LogLoss: 1.17591453159
 ------------------
+train.csv, calcFromFile, Tree Option1:
+Logloss: 2.07930132714
+------------------
+train_small.csv, calcFromFile, Tree Option1: 
+LogLoss: 3.43172216301
+LogLoss: 3.03513697394
+LogLoss: 3.84033141626
+LogLoss: 2.58152111026
+LogLoss: 3.03082114512
+LogLoss: 2.80077925648
+LogLoss: 2.8525862741
+LogLoss: 2.38319803619
+LogLoss: 2.56754957046
+LogLoss: 2.7467462012
+Average LogLoss: 2.9270392147
+------------------^
