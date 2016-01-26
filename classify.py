@@ -5,7 +5,7 @@ from sklearn.svm import SVC
     
 def classifyLogistic(trainSet, trainLabels, testSet):
 
-    clf = LogisticRegression(C=0.4, solver='lbfgs', verbose=1, max_iter=10000, multi_class='multinomial', n_jobs=8)
+    clf = LogisticRegression(C=0.4, solver='lbfgs', verbose=1, max_iter=10000, multi_class='multinomial', n_jobs=1)
     clf.fit(trainSet, trainLabels)
     predictedLabels = clf.predict_proba(testSet)
     
