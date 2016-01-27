@@ -145,3 +145,50 @@ Starting calculation: Wed Jan 27 18:43:23 2016
 Average Log Loss:  1.99973878751
 Finished calculation: Wed Jan 27 18:45:21 2016
 ------------------
+Starting calculation: Wed Jan 27 17:51:48 2016 (10 CPUs)
+train_small.csv, calcFromFile, Logistic tuned:
+LogLoss: 1.62014642148
+LogLoss: 1.66890460486
+LogLoss: 1.87054489743
+LogLoss: 1.68405089529
+LogLoss: 1.87280163601
+LogLoss: 1.5705910414
+LogLoss: 1.67121306511
+LogLoss: 1.81732948165
+LogLoss: 1.44264164532
+LogLoss: 1.70424558135
+Average LogLoss: 1.69224692699
+Finished calculation: Wed Jan 27 17:53:00 2016
+------------------
+Starting calculation: Wed Jan 27 17:57:36 2016
+train_small.csv, calcFromFile, Logistic Option1:
+LogLoss: 1.76748976692
+LogLoss: 1.91136588587
+LogLoss: 1.95209790793
+LogLoss: 2.04099064656
+LogLoss: 1.99628150237
+LogLoss: 1.88786512973
+LogLoss: 1.8405762393
+LogLoss: 2.0521847987
+LogLoss: 1.61903943271
+LogLoss: 1.86499840271
+Average LogLoss: 1.89328897128
+[Parallel(n_jobs=20)]: Done  10 out of  10 | elapsed:    0.5s finished
+Finished calculation: Wed Jan 27 17:57:37 2016
+------------------
+Starting calculation: Wed Jan 27 18:01:15 2016
+train_small.csv, calcFromFile, Naive Bayes:
+LogLoss: 28.8705355706
+LogLoss: 25.1933659486
+LogLoss: 27.6310211159
+LogLoss: 26.4120054785
+LogLoss: 26.4120054786
+LogLoss: 28.037453032
+LogLoss: 26.0056669326
+LogLoss: 27.6310211159
+LogLoss: 26.4120054785
+LogLoss: 28.7511763229
+Average LogLoss: 27.1356256474
+[Parallel(n_jobs=20)]: Done  10 out of  10 | elapsed:    0.5s finished
+Finished calculation: Wed Jan 27 18:01:15 2016
+------------------
