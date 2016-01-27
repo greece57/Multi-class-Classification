@@ -131,3 +131,17 @@ LogLoss: 0.890418161662
 LogLoss: 0.936064245204
 Average LogLoss: 0.93865308932
 ------------------
+Starting calculation: Wed Jan 27 18:43:23 2016
+[LibSVM]Logloss: 1.76772107508
+[LibSVM]Logloss: 2.11622163987
+[LibSVM]Logloss: 2.1553298326
+[LibSVM]Logloss: 2.02057590728
+[LibSVM]Logloss: 2.1391088147
+[LibSVM]Logloss: 1.95360068791
+[LibSVM]Logloss: 2.01982744955
+[LibSVM]Logloss: 1.99968001586
+[LibSVM]Logloss: 2.0467240421
+[LibSVM]Logloss: 1.77859841018
+Average Log Loss:  1.99973878751
+Finished calculation: Wed Jan 27 18:45:21 2016
+------------------
