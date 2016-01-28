@@ -13,8 +13,6 @@ for row in csv_file_object: # Skip through each row in the csv file,
     rows.append(row[0:]) 	# adding each row to the data variable
 data = np.array(rows).astype('int') 		# Then convert from a list to an array
 
-#data = data[range(1000),:] # take only first 500 rows of dataset
-
 Y = data[:,0]
 X = np.delete(data, 0, 1)
 

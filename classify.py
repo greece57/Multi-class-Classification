@@ -3,7 +3,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 def classifyLogisticRegression(trainSet, trainLabels, testSet):
 	
-	clf = LogisticRegression(solver='lbfgs', multi_class='multinomial')
+	clf = LogisticRegression()
 	clf.fit(trainSet, trainLabels)
 	predictedLabels = clf.predict_proba(testSet)
 
@@ -11,7 +11,7 @@ def classifyLogisticRegression(trainSet, trainLabels, testSet):
 
 def classifyRandomForest(trainSet, trainLabels, testSet):
     
-    clf = RandomForestClassifier(1000, verbose=2, n_jobs=-1)
+    clf = RandomForestClassifier(1000)
     clf.fit(trainSet, trainLabels)
     predictedLabels = clf.predict_proba(testSet)
     
