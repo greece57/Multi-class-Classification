@@ -7,27 +7,17 @@ Created on Sun Jan 10 18:01:56 2016
 
 import numpy as np
 import csv as csv
-from log_loss import calc
+from classify import classifyRandomForest, classifySupportVectorMaschine
+from classify import classifyDecisionTree, classifyGradientBoosting
+from classify import classifyBayes, classifyLogistic
 
-def createNumberedDictionary(data, normalize=False):
-    data = np.unique(data)    
-    if normalize:    
-        step = 1/(len(data)-1)
-    else:
-        step = 1
-    entryNr = 0
-    dataDirectory = dict()
-    for i in range(data.shape[0]):
-        dataDirectory[data[i]] = entryNr
-        entryNr += step
-    return dataDirectory    
-    
-    
-def readFileInclHeader(name, maxRows = -1, convertToInt = True):
+   
+def readFile(fileName, maxRows = -1, convertToInt = True):
     # Load data
-    csv_file_object = csv.reader(open(name, 'rb')) # Load in the csv file
-    header = csv_file_object.next() 					  # Skip the fist line as it is a header
-    rows=[] 											  # Create a variable to hold the data
+
+    csv_file_object = csv.reader(open(fileName, 'rb')) # Load in the csv file
+    csv_file_object.next() # Skip the fist line as it is a header
+    rows=[] # Create a variable to hold the data
 
 
     cRow = 1
@@ -52,12 +42,63 @@ def readFileInclHeader(name, maxRows = -1, convertToInt = True):
     print 'Bytes: ', data.nbytes    
     
     rows = []
-    return data, header
     
-def readFile(name, maxRows = -1, convertToInt = True):
-    data, header = readFileInclHeader(name, maxRows, convertToInt)
-    #data = np.genfromtxt(name, np.int8, delimiter=',', names=True) 
     return data
     
-def calcLogLoss(X,Y,classifier):
-    return calc(X,Y,classifier)
+    
+def createNumberedDictionary(data, normalize=False):
+    """ create a Dictionary out of array
+    Example:
+    data = ['a','b','c']
+    return = {'a': 0, 'b': 1, 'c': 2}
+    """
+    data = np.unique(data)    
+    if normalize:    
+        step = 1/(len(data)-1)
+    else:
+        step = 1
+    entryNr = 0
+    dataDirectory = dict()
+    for i in range(data.shape[0]):
+        dataDirectory[data[i]] = entryNr
+        entryNr += step
+    return dataDirectory  
+    
+    
+def chooseClassifier(classifierName):
+    # returns classifier Method according to Name
+    if (classifierName == 'randomForest'):
+        classifier = classifyRandomForest
+    if (classifierName == 'SVM'):
+        classifier = classifySupportVectorMaschine
+    if (classifierName == 'GradientBoosting'):
+        classifier = classifyGradientBoosting
+    if (classifierName == 'Naive'):
+        classifier = classifyBayes
+    if (classifierName == 'Logistic'):
+        classifier = classifyLogistic
+    if (classifierName == 'Tree'):
+        classifier = classifyDecisionTree
+        
+    return classifier
+
+
+def createResultFile(fileConfig, classifierName, averageLogLoss, 
+                     loglosses, startTime, endTime):
+    # append LogLosses and AverageLogLoss to result-file
+    outputString = ""
+    outputString += fileConfig[0] + ", " + fileConfig[2] + ", "
+    outputString += classifierName + " " + "\n"
+    outputString += "StartTime: " + startTime + "\n"
+    outputString += "EndTime: " + endTime + "\n \n"
+    for logloss in loglosses:
+        outputString += "LogLoss: "
+        outputString += str(logloss)
+        outputString += "\n"
+    outputString += "Average LogLoss: " + str(averageLogLoss)
+    
+    outputString += "\n------------------\n"
+        
+    fw = open("result", 'a')
+    fw.write(outputString)
+    fw.close()

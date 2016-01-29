@@ -6,7 +6,7 @@ from sklearn.tree import DecisionTreeClassifier
     
 def classifyLogistic(trainSet, trainLabels, testSet):
 
-    clf = LogisticRegression(C=0.4, solver='lbfgs', verbose=1, max_iter=10000, multi_class='multinomial', n_jobs=1)
+    clf = LogisticRegression(C=0.4, solver='lbfgs', verbose=1, max_iter=10000, multi_class='multinomial')
     clf.fit(trainSet, trainLabels)
     predictedLabels = clf.predict_proba(testSet)
     
@@ -46,7 +46,7 @@ def classifyGradientBoosting(trainSet, trainLabels, testSet):
     
 def classifyDecisionTree(trainSet, trainLabels, testSet):
     
-    clf = DecisionTreeClassifier(min_samples_split=500)
+    clf = DecisionTreeClassifier(min_samples_split=1000)
     clf.fit(trainSet, trainLabels)
     predictedLabels = clf.predict_proba(testSet)
     

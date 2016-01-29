@@ -2,22 +2,26 @@ import numpy as np
 import time
 from math import log
 from sklearn.cross_validation import KFold
+from classify import classifyRandomForest
 from joblib import Parallel, delayed
 
 
-def calc(X,Y,classifier):
+def calcLogLoss(X,Y,classifier):
     kf = KFold(X.shape[0], n_folds=10) # Initialize cross validation
 
     loglosses = [] # Variable that will store the correctly predicted intances
     
+    # calculate Loglosses
     if (classifier != classifyRandomForest):
         # execute 10 logloss calculations parallel
         loglosses = Parallel(n_jobs=10, verbose=10)(delayed(innerLoopLogLoss)(trainIndex, testIndex, X, Y, classifier) for trainIndex, testIndex in kf)    
     else:
-        # only for random Forest print progress into progress file
-        # and work parallel in the classifier
+        # only for random Forest
+        # prints progress into progress file
+        # and works parallel in the classifier because of n_job param
         idx = 0    
         for trainIndex, testIndex in kf:
+            # calc 1 logLoss in the inner LogLoss-Loop
             logloss = innerLoopLogLoss(trainIndex, testIndex, X, Y, classifier)
             loglosses.append(logloss)
         
@@ -29,14 +33,17 @@ def calc(X,Y,classifier):
             fw.write(outputString)
             fw.close()
     
+    
+    # calc TotalLogLoss
     totalLogloss = 0
     for logloss in loglosses:
         totalLogloss += logloss
     print 'Average Log Loss: ', totalLogloss/len(loglosses)
+    
     return (totalLogloss/len(loglosses)), loglosses
     
 def innerLoopLogLoss(trainIndex, testIndex, X, Y, classifier):
-    
+    # classifies given Set and calcs LogLoss
     
     trainSet = X[trainIndex]
     testSet = X[testIndex]
