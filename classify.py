@@ -2,6 +2,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
     
 def classifyLogistic(trainSet, trainLabels, testSet):
 
@@ -38,6 +39,14 @@ def classifySupportVectorMaschine(trainSet, trainLabels, testSet):
 def classifyGradientBoosting(trainSet, trainLabels, testSet):
     
     clf = GradientBoostingClassifier(verbose=1)
+    clf.fit(trainSet, trainLabels)
+    predictedLabels = clf.predict_proba(testSet)
+    
+    return predictedLabels, clf.classes_
+    
+def classifyDecisionTree(trainSet, trainLabels, testSet):
+    
+    clf = DecisionTreeClassifier(min_samples_split=500)
     clf.fit(trainSet, trainLabels)
     predictedLabels = clf.predict_proba(testSet)
     
