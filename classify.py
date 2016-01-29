@@ -5,7 +5,7 @@ from sklearn.svm import SVC
     
 def classifyLogistic(trainSet, trainLabels, testSet):
 
-    clf = LogisticRegression()
+    clf = LogisticRegression(C=0.4, solver='lbfgs', verbose=1, max_iter=10000, multi_class='multinomial', n_jobs=1)
     clf.fit(trainSet, trainLabels)
     predictedLabels = clf.predict_proba(testSet)
     
@@ -21,7 +21,7 @@ def classifyBayes(trainSet, trainLabels, testSet):
     
 def classifyRandomForest(trainSet, trainLabels, testSet):
     
-    clf = RandomForestClassifier(100, min_samples_split=4, verbose=10, n_jobs=1)
+    clf = RandomForestClassifier(1000, min_samples_split=25, verbose=10, n_jobs=20)
     clf.fit(trainSet, trainLabels)
     predictedLabels = clf.predict_proba(testSet)
     
