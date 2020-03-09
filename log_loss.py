@@ -1,26 +1,26 @@
 import numpy as np
 import time
 from math import log
-from sklearn.cross_validation import KFold
+from sklearn.model_selection import KFold
 from classify import classifyRandomForest
 from joblib import Parallel, delayed
 
 
 def calcLogLoss(X,Y,classifier):
-    kf = KFold(X.shape[0], n_folds=10) # Initialize cross validation
+    kf = KFold(n_splits=10) # Initialize cross validation
 
     loglosses = [] # Variable that will store the correctly predicted intances
     
     # calculate Loglosses
-    if (classifier != classifyRandomForest):
+    if (False):
         # execute 10 logloss calculations parallel
-        loglosses = Parallel(n_jobs=10, verbose=10)(delayed(innerLoopLogLoss)(trainIndex, testIndex, X, Y, classifier) for trainIndex, testIndex in kf)    
+        loglosses = Parallel(n_jobs=10, verbose=10)(delayed(innerLoopLogLoss)(trainIndex, testIndex, X, Y, classifier) for trainIndex, testIndex in kf.split(X))    
     else:
         # only for random Forest
         # prints progress into progress file
         # and works parallel in the classifier because of n_job param
         idx = 0    
-        for trainIndex, testIndex in kf:
+        for trainIndex, testIndex in kf.split(X):
             # calc 1 logLoss in the inner LogLoss-Loop
             logloss = innerLoopLogLoss(trainIndex, testIndex, X, Y, classifier)
             loglosses.append(logloss)
@@ -29,7 +29,7 @@ def calcLogLoss(X,Y,classifier):
             idx+=1
             fw = open("progress", 'a')
             outputString = time.ctime() + " - " + str(idx) + ". Logloss: " + str(logloss) + "\n"
-            print outputString
+            print(outputString)
             fw.write(outputString)
             fw.close()
     
@@ -38,7 +38,7 @@ def calcLogLoss(X,Y,classifier):
     totalLogloss = 0
     for logloss in loglosses:
         totalLogloss += logloss
-    print 'Average Log Loss: ', totalLogloss/len(loglosses)
+    print('Average Log Loss: ', totalLogloss/len(loglosses))
     
     return (totalLogloss/len(loglosses)), loglosses
     
@@ -55,7 +55,7 @@ def innerLoopLogLoss(trainIndex, testIndex, X, Y, classifier):
     
     logloss = log_loss(testLabels, predictions, trips)
     strOutput = 'Logloss: ' + str(logloss)
-    print strOutput
+    print(strOutput)
     return logloss
     
 def log_loss(trueLabels, predictedLabels, trips, eps=1e-15):

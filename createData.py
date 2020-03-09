@@ -49,7 +49,7 @@ def create(fileConfig, exportToFile = ""):
     visits = []
     
     # create Array of unique Visits
-    print 'Start reading entries'
+    print('Start reading entries')
     currentVisit = Visit(-1,-1,-1)
     for entry in data:
         if (entry[5]!='NULL'):
@@ -62,7 +62,7 @@ def create(fileConfig, exportToFile = ""):
             currentVisit.departments.append(entry[5])
             currentVisit.fineLines.append(entry[6])
     
-    print 'Creating data for new Matrix'
+    print('Creating data for new Matrix')
     # create Dictionaries to fill newData-Matrix
     noVisits = len(visits)
     departmentsDict = createNumberedDictionary(data[:,5])
@@ -78,7 +78,7 @@ def create(fileConfig, exportToFile = ""):
     newData = np.zeros((noVisits + 1, noFeatures))
     newData = newData[:].astype('int8')
     
-    print 'Filling new Matrix'
+    print('Filling new Matrix')
     for i in range(0,len(visits)):
         # for each visit write TripType and Weekday
         row = i + 1
@@ -105,7 +105,7 @@ def create(fileConfig, exportToFile = ""):
 
     if exportToFile != '':
         # if there is a fileName specified write newMatrix into this file
-        print 'Exporting new Matrix'
+        print('Exporting new Matrix')
         np.savetxt(exportToFile, newData, delimiter=",", fmt="%s")
         
     return newData

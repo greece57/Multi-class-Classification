@@ -30,19 +30,19 @@ def classifyDataFile(fileConfig, classifierName):
     
     # ReadFile or CalcFile for classification
     if (fileConfig[2] == 'readFile'):
-        print 'Start reading'
+        print('Start reading')
         data = readFile(fileConfig[0], fileConfig[1])
-        print 'Stop reading'
+        print('Stop reading')
     else:
-        print 'Start creating Data'
+        print('Start creating Data')
         data = create(fileConfig)
         data = np.delete(data, 0, 0)
-        print 'Finished creating Data'
+        print('Finished creating Data')
         
     # Seperate Labels and the Rest of the dataSet
-    Labels = data[:,0]
-    Set = np.delete(data, 0 , 1)
-    
+    Labels = data[:,-4]
+    Set = np.delete(data, -4 , 1)
+
     # Release dataArray for memory saving
     data = []
     
@@ -50,22 +50,22 @@ def classifyDataFile(fileConfig, classifierName):
     classifier = chooseClassifier(classifierName)
     
     startTime = time.ctime()
-    print 'Starting calculation: ' + startTime
+    print('Starting calculation: ' + startTime)
     
     # Calc the indipendent LogLosses and the Average Final LogLoss
     averageLogLoss, loglosses = calcLogLoss(Set, Labels, classifier)
     
     endTime = time.ctime()
-    print 'Finished calculation: ' + endTime
+    print('Finished calculation: ' + endTime)
     
     
-    print 'Writing result to file'
+    print('Writing result to file')
     createResultFile(fileConfig, classifierName, 
                      averageLogLoss, loglosses,
                      startTime, endTime)
     
     
-    print 'Finished calc LogLoss -> extended result file'
+    print('Finished calc LogLoss -> extended result file')
     
 
 if __name__ == "__main__":

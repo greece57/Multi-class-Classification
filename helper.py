@@ -15,8 +15,9 @@ from classify import classifyBayes, classifyLogistic
 def readFile(fileName, maxRows = -1, convertToInt = True):
     # Load data
 
-    csv_file_object = csv.reader(open(fileName, 'rb')) # Load in the csv file
-    csv_file_object.next() # Skip the fist line as it is a header
+    csv_file = open(fileName, 'r', encoding="utf8")
+    csv_file_object = csv.reader(csv_file) # Load in the csv file
+    next(csv_file_object) # Skip the fist line as it is a header
     rows=[] # Create a variable to hold the data
 
 
@@ -30,16 +31,16 @@ def readFile(fileName, maxRows = -1, convertToInt = True):
             percent = (100*cRow/maxRows)
             if (percent == nextLimit):
                 nextLimit += 5
-                print 'Progress: ', percent
+                print('Progress: ', percent)
                 if (cRow == maxRows):
                     break
     
     if convertToInt:
-        data = np.array(rows).astype('int8') 		# Then convert from a list to an array
+        data = np.array(rows).astype('float32') 		# Then convert from a list to an array
     else:
         data = np.array(rows)
         
-    print 'Bytes: ', data.nbytes    
+    print('Bytes: ', data.nbytes)
     
     rows = []
     
