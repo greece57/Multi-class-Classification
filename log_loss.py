@@ -52,6 +52,12 @@ def innerLoopLogLoss(trainIndex, testIndex, X, Y, classifier):
     predictions, trips = classifier(trainSet, trainLabels, testSet)
     
     testLabels = Y[testIndex]
+
+    print(testLabels.shape)
+    print(np.expand_dims(testLabels, axis=1).shape)
+    print(predictions.shape)
+    result = np.hstack([predictions, np.expand_dims(testLabels, axis=1)])
+    print(result)
     
     logloss = log_loss(testLabels, predictions, trips)
     strOutput = 'Logloss: ' + str(logloss)

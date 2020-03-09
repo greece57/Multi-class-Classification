@@ -70,7 +70,8 @@ def classifyDataFile(fileConfig, classifierName):
 
 if __name__ == "__main__":
     # Full File
-    fileConfig = ('train.csv', 647055, 'createFile')
+    #fileConfig = ('paindata.csv', 74066, 'readFile')
+    fileConfig = ('paindata_small.csv', 993, 'readFile')
     # touple beeing (FileName, NumberOfLines in File, readFile || createFile)
     
     # Small File
