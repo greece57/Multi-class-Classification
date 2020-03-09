@@ -41,7 +41,7 @@ def classifyDataFile(fileConfig, classifierName):
         
     # Seperate Labels and the Rest of the dataSet
     Labels = data[:,-4]
-    Set = np.delete(data, -4 , 1)
+    Set = np.delete(data, np.s_[-4:], 1)
 
     # Release dataArray for memory saving
     data = []
